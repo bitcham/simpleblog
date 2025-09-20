@@ -23,4 +23,9 @@ class Article(
             return Article(title, content)
         }
     }
+
+    fun update(title: String, content: String){
+        this.title = title
+        this.content = content
+    }
 }
