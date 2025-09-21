@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Article</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="p-5 mb-5 text-center</> bg-light">
+    <h1 class="mb-3">My Blog</h1>
+    <h4 class="mb-3">Welcome to my blog!</h4>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <article>
+                <input type="hidden" id="article-id" th:value="${article.id}"/>
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1" th:text="${article.title}">Article Title</h1>
+                    <div class="text-muted fst-italic mb-2" th:text="${#temporals.format(article.createdAt, 'dd MMMM yyyy')}">1 January, 2025</div>
+                </header>
+                <section class="mb-5">
+                    <p class="fs-5 mb-4" th:text="${article.content}">Article Content</p>
+                </section>
+                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                <button type="button" id="delete-btn"
+                        class="btn btn-secondary btn-sm">Delete</button>
+            </article>
+        </div>
+    </div>
+</div>
+
+<script src="/js/article.js"></script>
+</body>
+</html>

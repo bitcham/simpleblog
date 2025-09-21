@@ -5,6 +5,9 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
+import java.time.LocalDateTime
 
 @Entity
 class Article(
@@ -12,7 +15,15 @@ class Article(
     var title: String,
 
     @Column(nullable = false)
-    var content: String
+    var content: String,
+
+    @CreatedDate
+    @Column(name = "created_at")
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    var updatedAt: LocalDateTime = LocalDateTime.now()
 ){
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
