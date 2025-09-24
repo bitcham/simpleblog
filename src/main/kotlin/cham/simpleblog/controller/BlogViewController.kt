@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class BlogViewController(
@@ -13,7 +14,7 @@ class BlogViewController(
 ) {
     @GetMapping("/articles")
     fun getArticles(model: Model): String{
-        val articles = blogService.findAll().map{ ArticleListViewResponse(it.id!!, it.title, it.content, it.createdAt) }
+        val articles = blogService.findAll().map{ ArticleListViewResponse.from(it) }
 
         model.addAttribute("articles", articles)
 
@@ -23,10 +24,23 @@ class BlogViewController(
     @GetMapping("/articles/{id}")
     fun getArticle(@PathVariable id:Long, model: Model): String{
         val article = blogService.findById(id)
-        val articleListViewResponse = ArticleListViewResponse(article.id!!, article.title, article.content, article.createdAt)
 
-        model.addAttribute("article", articleListViewResponse)
+        model.addAttribute("article", ArticleListViewResponse.from(article))
 
         return "article"
+    }
+
+    @GetMapping("/new-article")
+    fun newArticle(@RequestParam(required = false) id:Long?, model: Model): String{
+        val article = if(id == null){
+            ArticleListViewResponse()
+        } else{
+            val existingArticle = blogService.findById(id)
+            ArticleListViewResponse.from(existingArticle)
+        }
+
+        model.addAttribute("article", article)
+
+        return "newArticle"
     }
 }

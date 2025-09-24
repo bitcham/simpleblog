@@ -1,11 +1,20 @@
 package cham.simpleblog.dto
 
+import cham.simpleblog.domain.Article
 import java.time.LocalDateTime
 
 data class ArticleListViewResponse(
-    val id: Long,
-    val title: String,
-    val content: String,
-    val createdAt: LocalDateTime
+    val id: Long? = null,
+    val title: String = "",
+    val content: String = "",
+    val createdAt: LocalDateTime? = null
 ) {
+    companion object {
+        fun from(article: Article) = ArticleListViewResponse(
+            id = article.id,
+            title = article.title,
+            content = article.content,
+            createdAt = article.createdAt
+        )
+    }
 }
