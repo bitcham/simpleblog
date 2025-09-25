@@ -23,9 +23,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @SpringBootTest
 @AutoConfigureMockMvc
 class BlogApiControllerTest(
-    @field:Autowired val mockMvc: MockMvc,
-    @field:Autowired val blogRepository: BlogRepository,
-    @field:Autowired val objectMapper: ObjectMapper) : FunSpec({
+    val mockMvc: MockMvc,
+     val blogRepository: BlogRepository,
+     val objectMapper: ObjectMapper) : FunSpec({
 
     extensions(SpringExtension)
 

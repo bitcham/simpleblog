@@ -28,7 +28,7 @@ class User(@Column(nullable = false, unique = true)
         }
     }
 
-    override fun getAuthorities() = listOf(SimpleGrantedAuthority("user"))
+    override fun getAuthorities() = listOf(SimpleGrantedAuthority("ROLE_USER"))
 
     override fun getPassword(): String = password
 

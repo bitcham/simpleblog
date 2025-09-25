@@ -10,3 +10,6 @@ spring:
       ddl-auto: create-drop
     defer-datasource-initialization: true
     show-sql: true
+jwt:
+  issuer: hello@example.com
+  secret: hello-world-asdfdsafa-asdfsadfsdafdsafdsafsa
