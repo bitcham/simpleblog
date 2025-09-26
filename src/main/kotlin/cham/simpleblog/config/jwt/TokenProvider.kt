@@ -47,7 +47,7 @@ class TokenProvider(
             .compact()
     }
 
-    fun validToken(token: String): Boolean {
+    fun validToken(token: String?): Boolean {
         return try {
             val claims = Jwts.parser()
                 .verifyWith(secretKey)

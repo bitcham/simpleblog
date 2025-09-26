@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserDetailService(
-    val userRepository: UserRepository
+    private val userRepository: UserRepository
 ): UserDetailsService {
     override fun loadUserByUsername(email: String?): UserDetails? {
         return userRepository.findByEmail(email ?: throw IllegalArgumentException("Email not provided"))

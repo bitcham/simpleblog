@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 @Service
 class BlogService(
-    val blogRepository: BlogRepository
+    private val blogRepository: BlogRepository
 ) {
     fun save(request: AddArticleRequest): Article {
         return blogRepository.save(request.toEntity())
