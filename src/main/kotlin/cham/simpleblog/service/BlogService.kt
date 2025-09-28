@@ -4,6 +4,7 @@ import cham.simpleblog.domain.Article
 import cham.simpleblog.dto.AddArticleRequest
 import cham.simpleblog.dto.UpdateArticleRequest
 import cham.simpleblog.repository.BlogRepository
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -12,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional
 class BlogService(
     private val blogRepository: BlogRepository
 ) {
-    fun save(request: AddArticleRequest): Article {
-        return blogRepository.save(request.toEntity())
+    fun save(request: AddArticleRequest, username: String): Article {
+        return blogRepository.save(request.toEntity(username))
     }
 
     @Transactional(readOnly = true)
@@ -27,16 +28,30 @@ class BlogService(
     }
 
     fun delete(id: Long) {
-        blogRepository.deleteById(id)
+        val article = blogRepository.findById(id).orElseThrow { IllegalArgumentException("Article not found with id: $id") }
+
+        authorizeArticleAuthor(article)
+
+        blogRepository.delete(article)
     }
 
     fun update(id: Long, request: UpdateArticleRequest): Article {
         val article = blogRepository.findById(id).orElseThrow { IllegalArgumentException("Article not found with id: $id") }
 
+        authorizeArticleAuthor(article)
         article.update(request.title, request.content)
 
         return article
     }
+
+    private fun authorizeArticleAuthor(article: Article) {
+        val username = SecurityContextHolder.getContext().authentication.name
+
+        if(!article.author.equals(username)){
+            throw IllegalArgumentException("You are not authorized to modify this article.")
+        }
+    }
+
 
 
 }

@@ -1,6 +1,6 @@
 package cham.simpleblog.config.jwt
 
-import cham.simpleblog.config.JwtProperties
+import cham.simpleblog.config.jwt.JwtProperties
 import cham.simpleblog.domain.User
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

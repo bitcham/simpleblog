@@ -12,19 +12,23 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Table(name = "users")
 @Entity
-class User(@Column(nullable = false, unique = true)
-           private var email: String,
+class User(
+    @field:Column(nullable = false, unique = true)
+    private var email: String,
 
-           @Column(nullable = false)
-           private var password: String
+    @field:Column(nullable = false)
+    private var password: String,
+
+    @field:Column(unique = true)
+    var nickname: String
 ): UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
         protected set
 
     companion object{
-        fun of(email: String, password: String): User{
-            return User(email, password)
+        fun of(email: String, password: String, nickname: String): User{
+            return User(email, password, nickname)
         }
     }
 
@@ -39,5 +43,10 @@ class User(@Column(nullable = false, unique = true)
     override fun isCredentialsNonExpired() = true
 
     override fun isEnabled() = true
+
+    fun update(nickname: String): User{
+        this.nickname = nickname
+        return this
+    }
 
 }

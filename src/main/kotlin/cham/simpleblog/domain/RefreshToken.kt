@@ -8,14 +8,14 @@ import jakarta.persistence.Id
 
 @Entity
 class RefreshToken(
-    @Column(name = "user_id", nullable = false, unique = true)
+    @field:Column(name = "user_id", nullable = false, unique = true)
     val userId: Long,
 
-    @Column(name = "refresh_token", nullable = false)
+    @field:Column(name = "refresh_token", nullable = false)
     var refreshToken: String,
 ) {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @field:Column(updatable = false)
     var id: Long? = null
             protected set
 

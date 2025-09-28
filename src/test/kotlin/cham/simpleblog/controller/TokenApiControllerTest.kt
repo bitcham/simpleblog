@@ -1,6 +1,6 @@
 package cham.simpleblog.controller
 
-import cham.simpleblog.config.JwtProperties
+import cham.simpleblog.config.jwt.JwtProperties
 import cham.simpleblog.config.jwt.JwtFactory
 import cham.simpleblog.domain.RefreshToken
 import cham.simpleblog.domain.User
@@ -40,7 +40,7 @@ class TokenApiControllerTest(
         val url = "/api/token"
 
         val testUser = userRepository.save(
-            User.of("user@gmail.com", "test"))
+            User.of("user@gmail.com", "test", "test"))
 
         val refreshToken = JwtFactory.of(
             claims = mapOf("userId" to testUser.id!!))

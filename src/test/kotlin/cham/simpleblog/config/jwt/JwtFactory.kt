@@ -1,6 +1,6 @@
 package cham.simpleblog.config.jwt
 
-import cham.simpleblog.config.JwtProperties
+import cham.simpleblog.config.jwt.JwtProperties
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import java.time.Duration

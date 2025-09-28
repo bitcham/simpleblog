@@ -3,8 +3,15 @@ package cham.simpleblog.dto
 import cham.simpleblog.domain.Article
 
 data class AddArticleRequest(
-    val title: String,
-    val content: String
+    val author: String  = "",
+    val title: String = "",
+    val content: String = ""
 ) {
-    fun toEntity() = Article.of(title, content)
+    fun toEntity(author: String): Article {
+        return Article(
+            author = author,
+            title = title,
+            content = content
+        )
+    }
 }

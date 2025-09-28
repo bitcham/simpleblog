@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 
 @RestController
 class BlogApiController(
@@ -21,8 +22,8 @@ class BlogApiController(
 ) {
 
     @PostMapping("/api/articles")
-    fun addArticle(@RequestBody request: AddArticleRequest): ResponseEntity<Article> {
-        val savedArticle = blogService.save(request)
+    fun addArticle(@RequestBody request: AddArticleRequest, principal: Principal): ResponseEntity<Article> {
+        val savedArticle = blogService.save(request, principal.name)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedArticle)
     }
 

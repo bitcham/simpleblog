@@ -1,6 +1,6 @@
 package cham.simpleblog.config.jwt
 
-import cham.simpleblog.config.JwtProperties
+import cham.simpleblog.config.jwt.JwtProperties
 import cham.simpleblog.domain.User
 import cham.simpleblog.repository.UserRepository
 import io.kotest.core.spec.style.FunSpec
@@ -22,7 +22,8 @@ class TokenProviderTest(
     test("generateToken(): generate token passing user info and expired time"){
         val testUser = userRepository.save(User.of(
             email = "user@email.com",
-            password = "test"))
+            password = "test",
+            nickname = "test"))
 
         val token = tokenProvider.generateToken(testUser, Duration.ofDays(14))
 
