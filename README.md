@@ -2,6 +2,9 @@
 
 A Spring Boot blog application with JWT authentication and OAuth2 social login.
 
+![Image](https://github.com/user-attachments/assets/48b61545-a740-4c06-b017-2401c1b81d11)
+![Image](https://github.com/user-attachments/assets/7865eefb-185c-4106-a139-21dfb5f9186b)
+
 ## Features
 
 - JWT-based authentication with refresh tokens
